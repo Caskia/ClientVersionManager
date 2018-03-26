@@ -1,4 +1,5 @@
 # ------------------- hicoin-web-api Service ------------------- #
+##AWS## 
 kind: Service
 apiVersion: v1
 metadata:
