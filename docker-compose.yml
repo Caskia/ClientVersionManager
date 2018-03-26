@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  clientversionmanager:
+    image: clientversionmanager
+    build:
+      context: .
+      dockerfile: src/ClientVersionManager/Dockerfile
