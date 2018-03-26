@@ -1,0 +1,17 @@
+# ------------------- hicoin-web-api Service ------------------- #
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    k8s-app: hicoin-clientmanager-webapi
+  name: hicoin-clientmanager-webapi
+  namespace: default
+spec:   
+  ##LOCAL##type: NodePort 
+  ports:
+    - name: hicoin-clientmanager-webapi
+      port: 5001
+      targetPort: 5001
+      ##LOCAL##nodePort: 54321
+  selector:
+    k8s-app: hicoin-clientmanager-webapi

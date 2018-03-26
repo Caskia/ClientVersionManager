@@ -1,0 +1,39 @@
+# -------------------hicoin-clientmanager-webapi Deployment ------------------- #
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  labels:
+    k8s-app: hicoin-clientmanager-webapi
+  name: hicoin-clientmanager-webapi
+  namespace: default
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s-app: hicoin-clientmanager-webapi
+  template:
+    metadata:
+      labels:
+        k8s-app: hicoin-clientmanager-webapi
+    spec:
+      containers:
+      - name: hicoin-clientmanager-webapi
+        image: ${REGISTRY_API}/hicoin:clientmanager-webapi.build-${BUILD_NUMBER}
+        ports:
+        - containerPort: 5001
+          protocol: TCP
+        env:
+          - name: ASPNETCORE_ENVIRONMENT
+            value: "Production"
+        tty: true
+        volumeMounts:
+        - name: docker-config
+          mountPath: /app/docker-config/
+      nodeSelector:
+         kops.k8s.io/instancegroup: nodes-web-1
+      volumes:
+      - name: docker-config
+        configMap:
+          name: hicoin-clientmanager-webapi
+

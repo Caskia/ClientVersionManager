@@ -1,0 +1,15 @@
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hicoin-clientmanager-webapi-ingress
+  namespace: default
+spec:
+  rules:
+  - host: client-manager.${ROOT_DOMAIN}	
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: hicoin-clientmanager-webapi
+          servicePort: hicoin-clientmanager-webapi
