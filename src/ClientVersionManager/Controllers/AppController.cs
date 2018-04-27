@@ -16,12 +16,12 @@ namespace ClientVersionManager.Controllers
         {
             return new JsonResult(new
             {
-                downloadUrl = _configuration[$"App:{AppName}:IOS:DownloadUrl"],
-                updateMessageTitle = _configuration[$"App:{AppName}:IOS:UpdateMessageTitle"],
-                updateMessage = _configuration[$"App:{AppName}:IOS:UpdateMessage"],
-                version = _configuration[$"App:{AppName}:IOS:Version"],
-                updateTimeUtc = _configuration[$"App:{AppName}:IOS:UpdateTimeUtc"],
-                platform = _configuration[$"App:{AppName}:IOS:Platform"]
+                downloadUrl = _configuration[$"App:{AppName}:Android:DownloadUrl"],
+                updateMessageTitle = _configuration[$"App:{AppName}:Android:UpdateMessageTitle"],
+                updateMessage = _configuration[$"App:{AppName}:Android:UpdateMessage"],
+                version = _configuration[$"App:{AppName}:Android:Version"],
+                updateTimeUtc = _configuration[$"App:{AppName}:Android:UpdateTimeUtc"],
+                platform = _configuration[$"App:{AppName}:Android:Platform"]
             });
         }
 
@@ -29,12 +29,12 @@ namespace ClientVersionManager.Controllers
         {
             return new JsonResult(new
             {
-                downloadUrl = _configuration[$"App:{AppName}:Android:DownloadUrl"],
-                updateMessageTitle = _configuration[$"App:{AppName}:Android:UpdateMessageTitle"],
-                updateMessage = _configuration[$"App:{AppName}:Android:UpdateMessage"],
-                version = _configuration[$"App:{AppName}:Android:Version"],
-                updateTimeUtc = _configuration[$"App:{AppName}:Android:UpdateTimeUtc"],
-                platform = _configuration[$"App:{AppName}:Android:Platform"]
+                downloadUrl = _configuration[$"App:{AppName}:IOS:DownloadUrl"],
+                updateMessageTitle = _configuration[$"App:{AppName}:IOS:UpdateMessageTitle"],
+                updateMessage = _configuration[$"App:{AppName}:IOS:UpdateMessage"],
+                version = _configuration[$"App:{AppName}:IOS:Version"],
+                updateTimeUtc = _configuration[$"App:{AppName}:IOS:UpdateTimeUtc"],
+                platform = _configuration[$"App:{AppName}:IOS:Platform"]
             });
         }
 
