@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.IO;
+using System.Linq;
 
 namespace ClientVersionManager
 {
@@ -11,10 +13,28 @@ namespace ClientVersionManager
     {
         public Startup(IHostingEnvironment env)
         {
+            var basePath = Directory.GetCurrentDirectory();
+
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+
+            //external setting for docker
+            var configDirName = "docker-config";
+            var dirPath = $"{basePath}{Path.DirectorySeparatorChar}{configDirName}";
+            if (Directory.Exists(dirPath))
+            {
+                var skipDirectory = dirPath.Length;
+                if (!dirPath.EndsWith("" + Path.DirectorySeparatorChar)) skipDirectory++;
+                var fileNames = Directory.EnumerateFiles(dirPath, "*.json", SearchOption.AllDirectories)
+                    .Select(f => f.Substring(skipDirectory));
+                foreach (var fileName in fileNames)
+                {
+                    builder = builder.AddJsonFile($"{configDirName}{Path.DirectorySeparatorChar}{fileName}", optional: true, reloadOnChange: true);
+                }
+            }
+
             Configuration = builder.Build();
         }
 
