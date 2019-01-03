@@ -29,11 +29,6 @@ node {
                 sh("chmod +x ./build.sh && ./build.sh");
             } 
         }
-
-        stage('处理yaml'){
-            sh 'echo 当前环境为:$DEPLOY_ENV';
-            sh 'sed -i "s/##${DEPLOY_ENV}##//g" `grep "##${DEPLOY_ENV}##" -rl deploy/`'
-        }
         		
         stage("发布到k8s"){
 			kubernetesDeploy(
